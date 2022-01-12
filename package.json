@@ -1,0 +1,22 @@
+{
+    "name": "husami",
+    "description": "",
+    "keywords": [],
+    "license": "MIT",
+    "author": "DavLin",
+    "homepage": "https://github.com/davlin0222/husami#readme",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/davlin0222/husami.git"
+    },
+    "bugs": {
+        "url": "https://github.com/davlin0222/husami/issues"
+    },
+    "version": "1.0.0",
+    "private": true,
+    "files": [],
+    "main": "index.js",
+    "scripts": {
+        "test": "jest --watch-all"
+    }
+}
