@@ -1,8 +1,17 @@
 # Husami
 
-## Design docs
+# Setup
 
-### Technologies
+```bash
+npm install
+cd client
+npm install
+cd ..
+```
+
+# Design docs
+
+## Technologies
 
 -   Database: Redis DB
 -   Server: Node-express
