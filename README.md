@@ -24,4 +24,4 @@ cd ..
 ## Git practices
 
 [https://github.com/joelparkerhenderson/git-commit-message](https://github.com/joelparkerhenderson/git-commit-message)
-(with the additional keyword "Configure")
+(with the additional keywords: to Configure and to Style)
