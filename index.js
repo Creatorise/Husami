@@ -1,4 +1,6 @@
-const server = require('./src/server.js');
+const database_connection = require('./src/database.js');
+
+const server = require('./src/server.js')(database_connection);
 
 const PORT = process.env.PORT || 3000;
 
