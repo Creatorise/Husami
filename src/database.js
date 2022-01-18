@@ -11,21 +11,26 @@ async function database() {
     try {
         await client.connect();
 
-        const db = client.db('sample_supplies');
-        const sales = db.collection('sales');
+        const api_db = client.db('api');
+        const users_collection = api_db.collection('users');
 
-        return {
-            // db,
-            get_all_sales,
-        };
-
-        async function get_all_sales() {
-            return await sales.find().toArray();
-            // return { name: 'Anthony', age: 22 };
-        }
+        return dasebase_functions(users_collection);
     } catch (error) {
         console.error(`database ~ error`, error);
     }
 }
 
 module.exports = database;
+
+function database_functions(users_collection) {
+    return { get_all_users };
+
+    function get_all_users() {
+        return [
+            {
+                name: 'John Doe',
+                age: 22,
+            },
+        ];
+    }
+}
