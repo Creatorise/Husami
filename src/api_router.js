@@ -1,9 +1,9 @@
 const express = require('express');
 const api_router = express.Router();
 
-api_router.use(express.json());
+const hello_world_controller = require('./controllers/hello_world');
 
-module.exports = api_router;
+api_router.use(express.json());
 
 api_router.get('/', async (req, res) => {
     const database = await require('../database')();
@@ -14,3 +14,7 @@ api_router.get('/', async (req, res) => {
     // res.send({ name: 'Anthony', age: 22 });
     // res.send('Hello from api router');
 });
+
+api_router.get('/hello-world', hello_world_controller);
+
+module.exports = api_router;
