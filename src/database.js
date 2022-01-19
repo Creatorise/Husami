@@ -8,12 +8,14 @@ const client = new MongoClient(process.env.MONGO_DB_URI, {
     useUnifiedTopology: true,
 });
 
-async function database() {
+async function initiate_database() {
     try {
         await client.connect();
 
         const api_db = client.db('api');
         const user_collection = api_db.collection('users');
+
+        console.log('database connected');
 
         return database_functions(user_collection);
     } catch (error) {
@@ -21,14 +23,18 @@ async function database() {
     }
 }
 
-module.exports = database;
+module.exports = initiate_database;
 
 function database_functions(users_collection) {
-    return { get_all_users };
+    return { get_all_users, get_one_user };
 
     async function get_all_users() {
-        const all_users = users_collection.find().toArray();
-        console.log(`get_all_users ~ all_users`, all_users);
+        const all_users = await users_collection.find().toArray();
         return all_users;
+    }
+
+    async function get_one_user(name) {
+        const user = await users_collection.findOne({ name: name });
+        return user;
     }
 }
