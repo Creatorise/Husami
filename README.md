@@ -26,7 +26,7 @@ cd ..
 [https://github.com/joelparkerhenderson/git-commit-message](https://github.com/joelparkerhenderson/git-commit-message)
 (with the additional keywords: to Configure and to Style)
 
-# Teacher Instructions (Swedish)
+# Teacher Instructions (in Swedish)
 
 Projekt Mini-Axami  
 Skapa ett system för husägare. ( Users i ett vanligt system )

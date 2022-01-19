@@ -1,7 +1,4 @@
 const { MongoClient } = require('mongodb');
-const dotenv = require('dotenv');
-
-dotenv.config();
 
 const client = new MongoClient(process.env.MONGO_DB_URI, {
     useNewUrlParser: true,
@@ -14,8 +11,6 @@ async function initiate_database() {
 
         const api_db = client.db('api');
         const user_collection = api_db.collection('users');
-
-        console.log('database connected');
 
         return database_functions(user_collection);
     } catch (error) {

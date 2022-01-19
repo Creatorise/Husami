@@ -3,6 +3,8 @@ const app = express();
 
 app.use(express.static('client/public'));
 
+const dotenv = require('dotenv');
+dotenv.config();
 const PORT = process.env.PORT ?? 3000;
 
 app.listen(PORT, function (error) {
