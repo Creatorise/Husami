@@ -1,5 +1,3 @@
-const initiate_database = require('./src/database');
-
 const express = require('express');
 const app = express();
 
@@ -15,13 +13,15 @@ app.listen(PORT, function (error) {
     console.log(`Server up and running on port ${PORT} (http://localhost:${PORT})`);
 });
 
-const api_router = require('./src/api_router');
-app.use('/api', use_database, api_router);
-
-async function use_database(req, res, next) {
+(async function () {
+    const initiate_database = require('./src/database');
     const database = await initiate_database();
 
-    req.db = database;
+    const api_router = require('./src/api_router');
+    app.use('/api', use_database, api_router);
 
-    next();
-}
+    async function use_database(req, res, next) {
+        req.db = database;
+        next();
+    }
+})();
