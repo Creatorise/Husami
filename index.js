@@ -3,8 +3,7 @@ const app = express();
 
 app.use(express.static('client/public'));
 
-const dotenv = require('dotenv');
-dotenv.config();
+require('dotenv').config();
 const PORT = process.env.PORT ?? 3000;
 
 app.listen(PORT, function (error) {
@@ -22,7 +21,7 @@ app.listen(PORT, function (error) {
     const api_router = require('./src/api_router');
     app.use('/api', use_database, api_router);
 
-    async function use_database(req, res, next) {
+    async function use_database(req, _, next) {
         req.db = database;
         next();
     }

@@ -10,9 +10,9 @@ async function initiate_database() {
         await client.connect();
 
         const api_db = client.db('api');
-        const user_collection = api_db.collection('users');
+        const users_collection = api_db.collection('users');
 
-        return database_functions(user_collection);
+        return database_functions(users_collection);
     } catch (error) {
         console.error(`database ~ error`, error);
     }
