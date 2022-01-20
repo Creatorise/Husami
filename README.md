@@ -1,5 +1,7 @@
 # Husami
 
+A system for house owners to manage assignments for craftsmen
+
 # Setup
 
 ```bash
@@ -26,7 +28,46 @@ cd ..
 [https://github.com/joelparkerhenderson/git-commit-message](https://github.com/joelparkerhenderson/git-commit-message)
 (with the additional keywords: to Configure and to Style)
 
-# Teacher Instructions (in Swedish)
+# Teacher Instructions
+
+## User roles
+
+-   Admin
+-   Customer
+-   Worker
+
+## Allowed actions per role
+
+### Admin
+
+-   See list of customers
+-   Create a customer
+-   Remove a customer
+-   Edit cutomers' assignments
+
+### Customer
+
+-   Create new house
+-   Add house description
+-   Remove house
+-   Add worker to house
+-   Add assignments for workers
+
+### Worker
+
+-   Take on an assignment
+-   Add time estimite and other comments
+-   Tick off assignment when finished
+
+## Assignments
+
+-   Assignments are assigned a house
+-   Assigned to a worker or open to everyone
+-   Set high/low priority
+-   Deadline date
+-   When worker is assigned to assignment they recieve a mail
+
+# Teacher Instructions (Original in Swedish)
 
 Projekt Mini-Axami  
 Skapa ett system för husägare. ( Users i ett vanligt system )
@@ -45,10 +86,9 @@ Kund i produkten skall kunna göra följande
 -   Ta bort hus/fastighet (delete)
 -   Lägga till boende/hantverkare/användare (BHA) per hus ( create )
 -   Lägga till uppgift för BHA - Uppgiften skall ha antingen hög eller låg prioritet. Uppgiften skall ha deadline - Uppgiften skall antingen tilldelas BHA eller vara öppen för vem som helst att ta sig an.
+-   Om uppgift tilldelas BHA som finns i systemet skall denne få mail om uppgiften.
 
-    -   Om uppgift tilldelas BHA som finns i systemet skall denne få mail om uppgiften.
-        Read...
-        BHA i produkten skall kunna göra följande
+BHA i produkten skall kunna göra följande
 
 -   Ta sig an en uppgift: Då skall följande skrivas in:
     -   Ungefärlig tid för genomförande
