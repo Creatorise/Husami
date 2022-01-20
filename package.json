@@ -4,13 +4,13 @@
     "keywords": [],
     "license": "MIT",
     "author": "DavLin",
-    "homepage": "https://github.com/davlin0222/husami#readme",
+    "homepage": "https://github.com/Creatorise/husami#readme",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/davlin0222/husami.git"
+        "url": "git+https://github.com/Creatorise/husami.git"
     },
     "bugs": {
-        "url": "https://github.com/davlin0222/husami/issues"
+        "url": "https://github.com/Creatorise/husami/issues"
     },
     "version": "1.0.0",
     "private": true,
