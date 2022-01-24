@@ -29,13 +29,18 @@ function database_functions(users_collection) {
         return all_users;
     }
 
-    async function get_one_user(name) {
-        const user = await users_collection.findOne({ name: name });
+    async function get_one_user(user_query) {
+        const user = await users_collection.findOne(user_query);
         return user;
     }
 
     async function create_user(name, email, password) {
         const user = { name, email, password };
+        console.log(`create_user ~ get_one_user({ email })`);
+
+        if (await get_one_user({ email })) {
+            return false;
+        }
         const response = await users_collection.insertOne(user);
         // console.log(`create_user ~ response`, response);
 

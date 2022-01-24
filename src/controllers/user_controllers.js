@@ -13,7 +13,7 @@ async function get_all_users(req, res) {
 async function get_one_user(req, res) {
     const { name } = req.params;
 
-    const user = await req.db.get_one_user(name);
+    const user = await req.db.get_one_user({ name });
 
     return res.send(user);
 }
@@ -24,5 +24,5 @@ async function create_user(req, res) {
 
     const was_success = await req.db.create_user(name, email, password);
 
-    res.send({ name, email });
+    res.send({ success: was_success });
 }
