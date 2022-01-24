@@ -5,6 +5,7 @@ const {
     get_all_users,
     get_one_user,
     create_user,
+    delete_user,
 } = require('./controllers/user_controllers');
 
 api_router.use(express.json());
@@ -18,5 +19,7 @@ api_router.get('/users', get_all_users);
 api_router.get('/user/:name', get_one_user);
 
 api_router.post('/user/create', create_user);
+
+api_router.post('/user/delete', delete_user);
 
 module.exports = api_router;
