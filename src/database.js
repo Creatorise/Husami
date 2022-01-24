@@ -21,7 +21,13 @@ async function initiate_database() {
 module.exports = initiate_database;
 
 function database_functions(users_collection) {
-    return { get_all_users, get_one_user, create_user, delete_user };
+    return {
+        get_all_users,
+        // get_one_user,
+        create_user,
+        delete_user,
+    };
+
     // TODO: Add error handling in functions
 
     async function get_all_users() {
@@ -29,10 +35,10 @@ function database_functions(users_collection) {
         return all_users;
     }
 
-    async function get_one_user(user_query) {
-        const user = await users_collection.findOne(user_query);
-        return user;
-    }
+    // async function get_one_user(user_query) {
+    //     const user = await users_collection.findOne(user_query);
+    //     return user;
+    // }
 
     async function create_user(name, email, password) {
         const user = { name, email, password };
@@ -49,7 +55,6 @@ function database_functions(users_collection) {
 
     async function delete_user(email) {
         const { deletedCount } = await users_collection.deleteOne({ email });
-        console.log(`delete_user ~ deletedCount`, deletedCount);
 
         if (deletedCount === 0) {
             return false;
