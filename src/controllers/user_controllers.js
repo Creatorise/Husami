@@ -20,6 +20,9 @@ async function get_one_user(req, res) {
 
 async function create_user(req, res) {
     const { name, email, password } = req.body;
-    console.log(`create_user ~ name, email, password`, name, email, password);
+    // TODO: Validation
+
+    const was_success = await req.db.create_user(name, email, password);
+
     res.send({ name, email });
 }

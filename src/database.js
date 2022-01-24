@@ -21,7 +21,8 @@ async function initiate_database() {
 module.exports = initiate_database;
 
 function database_functions(users_collection) {
-    return { get_all_users, get_one_user };
+    return { get_all_users, get_one_user, create_user };
+    // TODO: Add error handling in functions
 
     async function get_all_users() {
         const all_users = await users_collection.find().toArray();
@@ -31,5 +32,13 @@ function database_functions(users_collection) {
     async function get_one_user(name) {
         const user = await users_collection.findOne({ name: name });
         return user;
+    }
+
+    async function create_user(name, email, password) {
+        const user = { name, email, password };
+        const response = await users_collection.insertOne(user);
+        // console.log(`create_user ~ response`, response);
+
+        return true;
     }
 }
