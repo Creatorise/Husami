@@ -9,50 +9,93 @@
 
 # Stories
 
+<details>
+    <summary>As an admin, I want to get list of users</summary>
 
-As an admin, I want to get list of users
+-   User contains
+    -   Name
+    -   Email address
+    -   Role
+
+</details>
 
 <details>
     <summary>As an admin, I want to register a user</summary>
 
-- Email address (unique) 
-- Role (admin/customer/worker) 
-- Name (optional) 
+-   Email address (unique)
+-   Role (admin/customer/worker)
+-   Name (optional)
 
 </details>
 
-As not_logged_in, I want to log in
+<details>
+    <summary>As not_logged_in, I want to log in</summary>
+</details>
 
-As logged_in, I want to edit profile information
+<details>
+    <summary>As logged_in, I want to edit my profile information</summary>
+</details>
 
-As logged_in, I want to get list of properties I'm associated to
+<details>
+    <summary>As logged_in, I want to get list of properties I'm associated to</summary>
+</details>
 
-As logged_in, I want to create a property
+<details>
+    <summary>As logged_in, I want to create a property</summary>
+</details>
 
-As logged_in, I want to remove myself from property
+<details>
+    <summary>As logged_in, I want to remove myself from property</summary>
+</details>
 
-As property_admin, I want to remove a property
+<details>
+    <summary>As property_admin, I want to remove a property</summary>
+</details>
 
-As property_admin, I want to edit property info
+<details>
+    <summary>As property_admin, I want to edit property info</summary>
+</details>
 
-As property_admin, I want to edit property info
+<details>
+    <summary>As property_admin, I want to edit property info</summary>
+</details>
 
-As property_admin, I want to add user to property as property_worker
+<details>
+    <summary>As property_admin, I want to add user to property as property_worker</summary>
+</details>
 
-As property_admin, I want to add user to property as property_admin
+<details>
+    <summary>As property_admin, I want to add user to property as property_admin</summary>
+</details>
 
-As property_admin, I want to remove property_associate from property
+<details>
+    <summary>As property_admin, I want to remove property_associate from property</summary>
+</details>
 
-As property_associate, I want to get list of tasks
+<details>
+    <summary>As property_associate, I want to get list of tasks</summary>
+</details>
 
-As property_associate, I want to create a task
+<details>
+    <summary>As property_associate, I want to create a task</summary>
+</details>
 
-As property_associate, I want to edit a task
+<details>
+    <summary>As property_associate, I want to edit a task</summary>
+</details>
 
-As property_associate, I want to assign a task to myself or another user
+<details>
+    <summary>As property_associate, I want to assign a task to myself or another user</summary>
+</details>
 
-As property_associate, I want to ressign from a task or remove other assigned users
+<details>
+    <summary>As property_associate, I want to ressign from a task or remove other assigned users</summary>
+</details>
 
-As property_associate, I want to complete a task
+<details>
+    <summary>As property_associate, I want to complete a task</summary>
+</details>
 
-As property_associate, I want to complete a task and update its information
+<details>
+    <summary>As property_associate, I want to complete a task and update its information</summary>
+</details>
