@@ -1,6 +1,6 @@
 module.exports = {
     get_all_users,
-    // get_one_user,
+    get_one_user,
     create_user,
     delete_user,
 };
@@ -11,13 +11,13 @@ async function get_all_users(req, res) {
     return res.send(users);
 }
 
-// async function get_one_user(req, res) {
-//     const { email } = req.params;
+async function get_one_user(req, res) {
+    const { email } = req.body;
 
-//     const { name } = await req.db.get_one_user({ email });
+    const { name } = await req.db.get_one_user({ email });
 
-//     return res.send({ name });
-// }
+    return res.send({ name });
+}
 
 async function create_user(req, res) {
     const { name, email, password } = req.body;

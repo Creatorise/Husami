@@ -23,7 +23,7 @@ module.exports = initiate_database;
 function database_functions(users_collection) {
     return {
         get_all_users,
-        // get_one_user,
+        get_one_user,
         create_user,
         delete_user,
     };
@@ -35,10 +35,10 @@ function database_functions(users_collection) {
         return all_users;
     }
 
-    // async function get_one_user(user_query) {
-    //     const user = await users_collection.findOne(user_query);
-    //     return user;
-    // }
+    async function get_one_user(user_query) {
+        const user = await users_collection.findOne(user_query);
+        return user;
+    }
 
     async function create_user(name, email, password) {
         const user = { name, email, password };
