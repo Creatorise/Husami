@@ -1,86 +1,49 @@
 # User Stories
 
-## User roles
+# Roles
 
-(One account may have multiple roles)
+-   not_logged_in
+-   logged_in
+-   property_associate
+    -   property_admin
+    -   property_worker
 
--   admin
--   property_owner
--   worker
+# Stories
 
-## User management
+As not_logged_in, I want to sign up
 
-As an admin, I want to see a list of all users
+As not_logged_in, I want to log in
 
--   GET all users
+As logged_in, I want to edit profile information
 
-As an admin, I want to create a property_owner user
+As logged_in, I want to get list of properties I'm associated to
 
--   POST create user
-    -   name
-    -   email
-    -   password
-    -   role: property_owner
+As logged_in, I want to create a property
 
-As an admin, I want to remove a user
+As logged_in, I want to remove myself from property
 
--   DELETE user by email
+As property_admin, I want to remove a property
 
-As an admin, I want to edit user information
+As property_admin, I want to edit property info
 
--   POST edit user
-    -   name
-    -   email
-    -   password
-    -   role
--   PATCH edit user name
--   PATCH edit user email
--   PATCH edit user password
--   PATCH edit user role
+As property_admin, I want to edit property info
 
-As a property_owner, I want to create a new property
+As property_admin, I want to add user to property as property_worker
 
--   POST create property
-    -   title
-    -   description
+As property_admin, I want to add user to property as property_admin
 
-As a property_owner, I want to see a list of all my properties
+As property_admin, I want to remove property_associate from property
 
--   GET all properties of user
+As property_associate, I want to get list of tasks
 
-As a property_owner, I want to remove a property
+As property_associate, I want to create a task
 
--   DELETE property by id
+As property_associate, I want to edit a task
 
-As a property_owner, I want to edit property information
+As property_associate, I want to assign a task to myself or another user
 
--   POST edit property
-    -   title
-    -   description
+As property_associate, I want to ressign from a task or remove other assigned users
 
-As a property_owner, I want to add worker to property
+As property_associate, I want to complete a task
 
--   POST add worker to property
-    -   email
-
-As a property_owner, I want to create a task
-
--   POST create task for property
-    -   title
-    -   Priority: low / high
-    -   deadline date
-    -   assign to workers
--   When created a task assign to worker notify worker by mail
-
-As a worker, I want to take on a task
-
--   POST assign me to task
-    -   estimated duration
-    -   preliminary cost
-    -   extra comment
--   When assigned the property_owner will be notified by mail
-    -   Information about the assigned task
-
-As a worker, I want to resign from task assigned to me
-
--   POST resign me from task
+As property_associate, I want to complete a task and update its information
