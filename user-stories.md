@@ -2,15 +2,24 @@
 
 # Roles
 
--   not_logged_in
--   logged_in
+-   admin
 -   property_associate
     -   property_admin
     -   property_worker
 
 # Stories
 
-As not_logged_in, I want to sign up
+
+As an admin, I want to get list of users
+
+<details>
+    <summary>As an admin, I want to register a user</summary>
+
+- Email address (unique) 
+- Role (admin/customer/worker) 
+- Name (optional) 
+
+</details>
 
 As not_logged_in, I want to log in
 
