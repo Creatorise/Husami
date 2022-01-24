@@ -21,14 +21,26 @@
         "watch-node": "nodemon index.js",
         "watch-svelte": "cd client && npm run dev",
         "run-node": "node index.js",
-        "run-svelte": "cd client && npm run start"
+        "run-svelte": "cd client && npm run start",
+        "test": "jest --watch-all",
+        "test-once": "jest --all"
     },
     "dependencies": {
         "concurrently": "^7.0.0",
         "cookie-parser": "^1.4.6",
         "dotenv": "^14.1.0",
         "express": "^4.17.2",
-        "mongodb": "^4.3.0",
-        "nodemon": "^2.0.15"
+        "mongodb": "^4.3.0"
+    },
+    "devDependencies": {
+        "jest": "^27.4.7",
+        "nodemon": "^2.0.15",
+        "supertest": "^6.2.2"
+    },
+    "jest": {
+        "verbose": true,
+        "modulePathIgnorePatterns": [
+            ",local"
+        ]
     }
 }
