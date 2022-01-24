@@ -3,6 +3,8 @@
 # Roles
 
 -   admin
+-   not_logged_in
+-   logged_in
 -   property_associate
     -   property_admin
     -   property_worker
@@ -12,10 +14,10 @@
 <details>
     <summary>As an admin, I want to get list of users</summary>
 
--   User contains
-    -   Name
+-   Each user entry contains
+    -   Name (If set)
     -   Email address
-    -   Role
+    -   Role (admin/customer/worker)
 
 </details>
 
@@ -30,6 +32,11 @@
 
 <details>
     <summary>As not_logged_in, I want to log in</summary>
+
+-   Enter email address
+-   Open mailbox
+-   Click link or copy code
+
 </details>
 
 <details>
