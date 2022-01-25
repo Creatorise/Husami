@@ -11,7 +11,9 @@ app.listen(PORT, function (error) {
         console.log('Error in server setup');
         return;
     }
-    console.log(`Server up and running on port ${PORT} (http://localhost:${PORT})`);
+    console.log(
+        `Server up and running on port ${PORT} (${process.env.BASE_URI}:${PORT})`
+    );
 });
 
 (async function () {
