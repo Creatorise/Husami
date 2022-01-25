@@ -1,6 +1,8 @@
 const express = require('express');
 const api_router = express.Router();
 
+const authenticate_login = require('./controllers/authenticate_login');
+
 const auth = require('./middlewares/auth');
 
 const {
@@ -15,6 +17,8 @@ api_router.use(express.json());
 api_router.get('/', async (req, res) => {
     return res.send('Welcome to api root');
 });
+
+api_router.post('/auth/login', authenticate_login);
 
 api_router.get('/users', auth.admin, get_all_users);
 
