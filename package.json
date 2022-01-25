@@ -33,14 +33,6 @@
         "mongodb": "^4.3.0"
     },
     "devDependencies": {
-        "jest": "^27.4.7",
-        "nodemon": "^2.0.15",
-        "supertest": "^6.2.2"
-    },
-    "jest": {
-        "verbose": true,
-        "modulePathIgnorePatterns": [
-            ",local"
-        ]
+        "nodemon": "^2.0.15"
     }
 }
