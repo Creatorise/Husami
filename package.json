@@ -21,9 +21,7 @@
         "watch-node": "nodemon index.js",
         "watch-svelte": "cd client && npm run dev",
         "run-node": "node index.js",
-        "run-svelte": "cd client && npm run start",
-        "test": "jest --watch-all",
-        "test-once": "jest --all"
+        "run-svelte": "cd client && npm run start"
     },
     "dependencies": {
         "concurrently": "^7.0.0",
@@ -31,6 +29,7 @@
         "dotenv": "^14.1.0",
         "express": "^4.17.2",
         "mongodb": "^4.3.0",
+        "morgan": "^1.10.0",
         "nodemailer": "^6.7.2"
     },
     "devDependencies": {

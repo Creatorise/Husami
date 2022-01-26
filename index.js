@@ -1,10 +1,13 @@
+require('dotenv').config();
+const PORT = process.env.PORT ?? 3000;
+
 const express = require('express');
 const app = express();
 
 app.use(express.static('client/public'));
 
-require('dotenv').config();
-const PORT = process.env.PORT ?? 3000;
+const morgan = require('morgan');
+app.use(morgan('dev'));
 
 app.listen(PORT, function (error) {
     if (error) {
