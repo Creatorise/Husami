@@ -25,7 +25,7 @@ async function initiate_api_router() {
 
     app.use('/api', use_database, api_router);
 
-    async function use_database(req, _, next) {
+    async function use_database(req, res, next) {
         req.db = database;
         next();
     }

@@ -15,7 +15,7 @@ api_router.get('/', async (req, res) => {
 
 api_router.post('/login', login.send_auth_link);
 api_router.get('/login/:auth_token', login.authenticate);
-api_router.get('/logout', login.logout);
+api_router.get('/logout', login.remove_auth_cookie);
 
 api_router.get('/users', auth.admin, users.index);
 api_router.get('/users/:id', auth.admin, users.show);
