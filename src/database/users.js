@@ -25,12 +25,8 @@ function users(users_collection) {
         return user;
     }
 
-    async function store(name, email) {
-        const user = { name, email };
-        // console.log(`store ~ user`, user);
-        // console.log(`store ~ show({ email })`);
-
-        if (await exists({ email })) {
+    async function store(user) {
+        if (await exists({ email: user.email })) {
             return false;
         }
         const response = await users_collection.insertOne(user);
@@ -60,6 +56,7 @@ function users(users_collection) {
 
     async function has_role(role, id) {
         const user = await users_collection.findOne({ _id: ObjectId(id) });
+        console.log(`has_role ~ user`, user);
 
         if (role === user.role) return true;
         return false;

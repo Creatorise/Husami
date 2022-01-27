@@ -21,10 +21,10 @@ async function show(req, res) {
 }
 
 async function store(req, res) {
-    const { name, email } = req.body;
+    const { name, email, role } = req.body;
     // TODO: Validation
 
-    const was_success = await req.db.users.store(name, email);
+    const was_success = await req.db.users.store({ name, email, role });
 
     return res.send({ success: was_success });
 }
