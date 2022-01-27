@@ -9,7 +9,7 @@ async function send_email(email_object) {
         port: 465,
         secure: true, // true for 465, false for other ports
         auth: {
-            user: 'noreply@creatorise.com',
+            user: process.env.EMAIL,
             pass: process.env.EMAIL_PASSWORD,
         },
     });
