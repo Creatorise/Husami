@@ -18,7 +18,8 @@ function create_auth_token(user_id, auth_code) {
 
 function decode_auth_token(auth_token) {
     try {
-        return jwt.decode(auth_token);
+        const auth_token_payload = jwt.decode(auth_token);
+        return auth_token_payload;
     } catch (error) {
         return null;
     }
