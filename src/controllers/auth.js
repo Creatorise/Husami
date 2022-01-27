@@ -7,33 +7,23 @@ module.exports = {
 };
 
 const EventEmitter = require('events');
-const waiter = new EventEmitter();
+const auth_emitter = new EventEmitter();
 
 async function send_auth_code(req, res) {
-    console.log(`generate_auth_code ~ generate_auth_code`);
     const { email } = req.body;
     // TODO: Validation of email
 
-    waiter.once('finish', (user_id, auth_code) => {
-        console.log(`waiter.on ~ user_id`, user_id);
-        console.log(`waiter.on ~ auth_code`, auth_code);
-        res.send('finished');
-        // res.redirect(`/api/auth/${user_id}/${auth_code}`);
-    });
-
-    // res.end();
-
     const email_exists = await req.db.users.exists({ email });
-
     if (!email_exists) {
         return;
     }
 
     const auth_code = await generate_hex_code(3);
-
     send_auth_email(email, auth_code);
 
-    return;
+    auth_emitter.once('close', (user_id, auth_code) => {
+        res.send('Auth close event triggered');
+    });
 }
 
 async function send_auth_email(email, auth_code) {
@@ -44,14 +34,14 @@ async function send_auth_email(email, auth_code) {
         // text: 'Hello world?', // plain text body
         html: `<b>${auth_code}</b>`, // html body
     };
-    console.log(`send_auth_email ~ email_object`, email_object);
+    // console.log(`send_auth_email ~ email_object`, email_object);
     await send_email(email_object);
 }
 
 async function login(req, res) {
     const { user_id, auth_code } = req.params;
 
-    waiter.emit('finish', user_id, auth_code);
-    res.send('check if finished');
+    auth_emitter.emit('close', user_id, auth_code);
+    res.send('Auth close event emitted');
     // res.redirect(`/api/auth/${user_id}/${auth_code}`);
 }
