@@ -8,16 +8,17 @@ async function generate_auth_code(req, res) {
     const { email } = req.body;
     // TODO: Validation of email
 
+    res.end();
+
     const email_exists = await req.db.users.exists({ email });
 
     if (!email_exists) {
-        return res.end();
+        return;
     }
 
-    const code = await generate_hex_code(3);
+    const auth_code = await generate_hex_code(3);
     console.log(`generate_code ~ code`, code);
 
-    // const was_success = await req.db.users.store(name, email);
-
-    // return res.send({ success: was_success });
+    req.auth_code = auth_code;
+    next();
 }
