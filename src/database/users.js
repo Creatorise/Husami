@@ -56,7 +56,6 @@ function users(users_collection) {
 
     async function has_role(role, id) {
         const user = await users_collection.findOne({ _id: ObjectId(id) });
-        console.log(`has_role ~ user`, user);
 
         if (role === user.role) return true;
         return false;

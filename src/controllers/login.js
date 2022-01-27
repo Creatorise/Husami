@@ -5,6 +5,7 @@ const send_email = require('../send_email');
 module.exports = {
     send_auth_link,
     authenticate,
+    logout,
 };
 
 const EventEmitter = require('events');
@@ -66,4 +67,9 @@ async function authenticate(req, res) {
     // res.send({ token });
     // res.send('Auth close event emitted');
     // res.redirect(`/api/auth/${user_id}/${auth_code}`);
+}
+
+function logout(req, res) {
+    res.clearCookie('auth_token');
+    res.send('The auth token has been removed');
 }
