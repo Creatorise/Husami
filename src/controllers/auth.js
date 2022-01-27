@@ -1,5 +1,6 @@
 const generate_hex_code = require('../generate_hex_code');
 const send_email = require('../send_email');
+const auth_token = require('../auth_token');
 
 module.exports = {
     send_auth_code,
@@ -25,7 +26,12 @@ async function send_auth_code(req, res) {
         // console.log(`auth_emitter.once ~ user_id`, user_id);
         // console.log(`auth_emitter.once ~ auth_code`, auth_code);
 
-        res.send('Auth close event triggered');
+        const token = auth_token.create(user_id);
+        console.log(`auth_emitter.once ~ token`, token);
+
+        res.send({ token });
+        // res.send('Auth close event triggered');
+        // res.redirect(`/api/auth/${user_id}/${auth_code}`);
     });
 }
 
@@ -48,6 +54,9 @@ async function login(req, res) {
     const { user_id, auth_code } = req.params;
 
     auth_emitter.emit('close', user_id, auth_code);
-    res.send('Auth close event emitted');
+
+    const token = auth_token.create(user_id);
+    res.send({ token });
+    // res.send('Auth close event emitted');
     // res.redirect(`/api/auth/${user_id}/${auth_code}`);
 }
