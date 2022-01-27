@@ -10,6 +10,7 @@ function users(users_collection) {
         destroy,
         exists,
         get_user,
+        has_role,
     };
 
     // TODO: Add error handling in database functions
@@ -55,5 +56,12 @@ function users(users_collection) {
     async function get_user(query) {
         const user = await users_collection.findOne(query);
         return user;
+    }
+
+    async function has_role(role, id) {
+        const user = await users_collection.findOne({ _id: ObjectId(id) });
+
+        if (role === user.role) return true;
+        return false;
     }
 }
