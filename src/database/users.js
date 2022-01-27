@@ -8,6 +8,7 @@ function users(users_collection) {
         show,
         store,
         destroy,
+        exists,
     };
 
     // TODO: Add error handling in database functions
@@ -47,6 +48,6 @@ function users(users_collection) {
 
     async function exists(query) {
         const user = await users_collection.findOne(query);
-        return user;
+        return !!user;
     }
 }

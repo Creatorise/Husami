@@ -2,12 +2,15 @@ const express = require('express');
 const api_router = express.Router();
 
 const users = require('./controllers/users');
+const auth = require('./controllers/auth');
 
 api_router.use(express.json());
 
 api_router.get('/', async (req, res) => {
     return res.send('Welcome to api root');
 });
+
+api_router.post('/auth', auth.generate_code /* auth.send_email */);
 
 api_router.get('/users', users.index);
 api_router.get('/users/:id', users.show);
