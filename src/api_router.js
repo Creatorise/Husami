@@ -10,7 +10,7 @@ api_router.get('/', async (req, res) => {
     return res.send('Welcome to api root');
 });
 
-api_router.post('/auth', auth.generate_auth_code /* auth.send_email */);
+api_router.post('/auth', auth.generate_auth_code, auth.send_auth_email);
 
 api_router.get('/users', users.index);
 api_router.get('/users/:id', users.show);
