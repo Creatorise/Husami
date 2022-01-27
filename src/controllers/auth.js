@@ -1,25 +1,20 @@
-const crypto = require('crypto');
-const { promisify } = require('util');
-const crypto_random_bytes = promisify(crypto.randomBytes);
+const generate_hex_code = require('../logic/generate_hex_code');
 
 module.exports = {
-    generate_code,
+    generate_auth_code,
 };
 
-async function generate_code(req, res) {
+async function generate_auth_code(req, res) {
     const { email } = req.body;
-    console.log(`generate_code ~ email`, email);
     // TODO: Validation of email
 
     const email_exists = await req.db.users.exists({ email });
-    console.log(`generate_code ~ email_exists`, email_exists);
 
     if (!email_exists) {
         return res.end();
     }
 
-    const buffer = await crypto_random_bytes(3);
-    const code = buffer.toString('hex');
+    const code = await generate_hex_code(3);
     console.log(`generate_code ~ code`, code);
 
     // const was_success = await req.db.users.store(name, email);
