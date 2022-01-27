@@ -1,12 +1,7 @@
 const express = require('express');
 const api_router = express.Router();
 
-const {
-    get_all_users,
-    get_user,
-    create_user,
-    delete_user,
-} = require('./controllers/user_controllers');
+const users = require('./controllers/users');
 
 api_router.use(express.json());
 
@@ -14,14 +9,10 @@ api_router.get('/', async (req, res) => {
     return res.send('Welcome to api root');
 });
 
-// api_router.post('/login', check_user_exists, send_login_mail);
-
-api_router.get('/get-users', get_all_users);
-
-api_router.post('/get-user', get_user);
-
-api_router.post('/create-user', create_user);
-
-api_router.post('/delete-user', delete_user);
+api_router.get('/users', users.index);
+api_router.get('/users/:id', users.show);
+api_router.post('/users', users.store);
+api_router.put('/users/:id', users.update);
+api_router.delete('/users/:id', users.destroy);
 
 module.exports = api_router;
