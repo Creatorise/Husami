@@ -11,6 +11,7 @@ function create_auth_token(user_id, auth_code) {
     const payload = { user_id, auth_code };
     const secret = process.env.JWT_SECRET;
     const auth_token = jwt.sign(payload, secret, {
+        //! Currently set to never expire
         // expiresIn: '60s'
     });
     return auth_token;

@@ -1,4 +1,4 @@
-const { decode_auth_token } = require('../token');
+const { decode_auth_token } = require('../utilities/token');
 
 const auth = { admin };
 module.exports = auth;
@@ -12,7 +12,7 @@ async function admin(req, res, next) {
         return res.send('Invalid auth token');
     }
 
-    const is_admin = await req.db.users.has_role('admin', auth_token_payload.user_id);
+    const is_admin = await req.db.user_has_role(auth_token_payload.user_id, 'admin');
 
     if (!is_admin) {
         return res.send('No permissions');
