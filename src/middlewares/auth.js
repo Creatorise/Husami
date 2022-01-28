@@ -5,17 +5,9 @@ module.exports = auth;
 
 async function admin(req, res, next) {
     const { auth_token } = req.cookies;
+    const auth_token_payload = verify_auth_token(auth_token);
+    if (!auth_token_payload) return res.send('Invalid auth token');
 
-    const { user } = verify_auth_token(auth_token);
-
-    if (!user) {
-        return res.send('Invalid auth token');
-    }
-
-    // const is_admin = await req.db.user_has_role(user.user_id, 'admin');
-
-    if (user.role !== 'admin') {
-        return res.send('No permissions');
-    }
+    if (auth_token_payload.user.role !== 'admin') return res.send('No access');
     next();
 }
