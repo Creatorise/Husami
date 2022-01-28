@@ -1,4 +1,3 @@
-const generate_hex_code = require('../utilities/generate_hex_code');
 const { create_auth_token, verify_auth_token } = require('../utilities/token');
 const send_auth_email = require('../utilities/send_auth_email');
 
@@ -18,10 +17,11 @@ async function send_auth_link(req, res) {
     const user = await req.db.get_user_by_email(email);
     if (!user) {
         return;
+        // Idea: if email not currently a user,
+        // send email asking if wanting to become a user
     }
 
-    const auth_code = await generate_hex_code(3);
-    const auth_token = create_auth_token(user._id, auth_code);
+    const auth_token = create_auth_token(user._id);
 
     send_auth_email(email, auth_token);
 
@@ -33,12 +33,7 @@ async function send_auth_link(req, res) {
 
 async function authenticate_link(req, res) {
     const { auth_token } = req.params;
-    auth_token_payload = await verify_auth_token(auth_token);
-    console.log(
-        `authenticate_link ~ auth_token_payload.user_id`,
-        auth_token_payload.user_id
-    );
-    // console.log(`authenticate_link ~ auth_token_payload`, auth_token_payload);
+    auth_token_payload = verify_auth_token(auth_token);
 
     if (!auth_token_payload) {
         return res.send('invalid auth token');
