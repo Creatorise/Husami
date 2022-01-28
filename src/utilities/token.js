@@ -7,8 +7,8 @@ const token = {
 
 module.exports = token;
 
-function create_auth_token(user_id) {
-    const payload = { user_id };
+function create_auth_token(user) {
+    const payload = { user: { id: user._id.toString(), role: user.role } };
     const secret = process.env.JWT_SECRET;
     const auth_token = jwt.sign(payload, secret, {
         //! Currently set to never expire

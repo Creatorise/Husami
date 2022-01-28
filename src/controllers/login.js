@@ -21,9 +21,9 @@ async function send_auth_link(req, res) {
         // send email asking if wanting to become a user
     }
 
-    const auth_token = create_auth_token(user._id);
+    const auth_token_to_send = create_auth_token(user);
 
-    send_auth_email(email, auth_token);
+    send_auth_email(email, auth_token_to_send);
 
     auth_emitter.once(user._id.toString(), auth_token => {
         res.cookie('auth_token', auth_token);
@@ -39,7 +39,7 @@ async function authenticate_link(req, res) {
         return res.send('invalid auth token');
     }
 
-    auth_emitter.emit(auth_token_payload.user_id.toString(), auth_token);
+    auth_emitter.emit(auth_token_payload.user.id.toString(), auth_token);
 
     res.cookie('auth_token', auth_token);
     res.send('The auth token has been stored as browser cookie');
