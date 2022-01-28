@@ -1,6 +1,7 @@
-const users = require('./controllers/users');
-const login = require('./controllers/login');
 const auth = require('./middlewares/auth');
+const login = require('./controllers/login');
+const users = require('./controllers/users');
+const houses = require('./controllers/houses');
 
 const cookie_parser = require('cookie-parser');
 const express = require('express');
@@ -19,5 +20,7 @@ api_router.get('/users/:id', auth.admin, users.show);
 api_router.post('/users', auth.admin, users.store);
 api_router.put('/users/:id', auth.admin, users.update);
 api_router.delete('/users/:id', auth.admin, users.destroy);
+
+api_router.get('/houses', auth.member, houses.index);
 
 module.exports = api_router;

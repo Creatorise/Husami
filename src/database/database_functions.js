@@ -2,7 +2,7 @@ const { ObjectId } = require('mongodb');
 
 module.exports = database_functions;
 
-function database_functions(users_collection) {
+function database_functions(users_collection, houses_collection) {
     return {
         get_all_users,
         get_user,
@@ -10,6 +10,7 @@ function database_functions(users_collection) {
         create_user,
         delete_user,
         user_has_role,
+        get_houses,
     };
 
     // TODO: Add error handling in database functions
@@ -54,5 +55,10 @@ function database_functions(users_collection) {
 
         if (user?.role === role) return true;
         return false;
+    }
+
+    async function get_houses(query) {
+        const houses = await houses_collection.find(query).toArray();
+        return houses;
     }
 }
