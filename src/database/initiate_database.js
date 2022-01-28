@@ -1,5 +1,5 @@
 const { MongoClient } = require('mongodb');
-const user_functions = require('./users');
+const database_functions = require('./database_functions');
 
 const client = new MongoClient(process.env.MONGO_DB_URI, {
     useNewUrlParser: true,
@@ -12,7 +12,7 @@ async function initiate_database() {
         const api_db = client.db('api');
         const users_collection = api_db.collection('users');
 
-        return { users: user_functions(users_collection) };
+        return database_functions(users_collection);
     } catch (error) {
         console.error(`database ~ error`, error);
     }
