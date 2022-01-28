@@ -9,12 +9,9 @@ const api_router = express.Router();
 api_router.use(express.json());
 api_router.use(cookie_parser());
 
-api_router.get('/', async (req, res) => {
-    return res.send('Welcome to api root');
-});
-
 api_router.post('/login', login.send_auth_link);
-api_router.get('/login/:auth_token', login.authenticate);
+api_router.get('/login/:auth_token', login.authenticate_link);
+
 api_router.get('/logout', login.remove_auth_cookie);
 
 api_router.get('/users', auth.admin, users.index);

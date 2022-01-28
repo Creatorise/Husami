@@ -52,7 +52,7 @@ function database_functions(users_collection) {
     async function user_has_role(id, role) {
         const user = await get_user(id);
 
-        if (user.role === role) return true;
+        if (user?.role === role) return true;
         return false;
     }
 }
