@@ -17,23 +17,34 @@
     "files": [],
     "main": "index.js",
     "scripts": {
-        "dev": "concurrently npm:watch-node npm:watch-svelte",
-        "watch-node": "nodemon index.js",
-        "watch-svelte": "cd client && npm run dev",
-        "run-node": "node index.js",
-        "run-svelte": "cd client && npm run start"
+        "dev": "cross-env NODE_ENV=development npm run node:watch-svelte:watch",
+        "node:watch-svelte:watch": "concurrently npm:node:watch npm:svelte:watch",
+        "node:watch": "nodemon index.js",
+        "svelte:watch": "cd client && npm run dev",
+        "node": "node index.js",
+        "svelte": "cd client && npm run start",
+        "test": "cross-env NODE_ENV=testing jest --watch-all"
     },
     "dependencies": {
-        "express": "^4.17.2",
-        "morgan": "^1.10.0",
-        "mongodb": "^4.3.0",
-        "jsonwebtoken": "^8.5.1",
         "cookie-parser": "^1.4.6",
-        "nodemailer": "^6.7.2",
-        "dotenv": "^14.1.0"
+        "dotenv": "^14.1.0",
+        "express": "^4.17.2",
+        "jsonwebtoken": "^8.5.1",
+        "mongodb": "^4.3.0",
+        "morgan": "^1.10.0",
+        "nodemailer": "^6.7.2"
     },
     "devDependencies": {
+        "concurrently": "^7.0.0",
+        "cross-env": "^7.0.3",
+        "jest": "^27.4.7",
         "nodemon": "^2.0.15",
-        "concurrently": "^7.0.0"
+        "supertest": "^6.2.2"
+    },
+    "jest": {
+        "verbose": false,
+        "modulePathIgnorePatterns": [
+            ",local"
+        ]
     }
 }

@@ -17,6 +17,14 @@ async function member(req, res, next) {
     const auth_token_payload = verify_auth_token(auth_token);
     if (!auth_token_payload) return res.send('Invalid auth token');
 
+    console.log(`member ~ auth_token_payload.user.role`, auth_token_payload.user.role);
+    if (
+        auth_token_payload.user.role !== 'admin' &&
+        auth_token_payload.user.role !== 'member'
+    ) {
+        return res.send('No access');
+    }
+
     req.user = auth_token_payload.user;
     next();
 }

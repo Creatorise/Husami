@@ -11,6 +11,7 @@ function database_functions(users_collection, houses_collection) {
         delete_user,
         user_has_role,
         get_houses,
+        create_house,
     };
 
     // TODO: Add error handling in database functions
@@ -60,5 +61,11 @@ function database_functions(users_collection, houses_collection) {
     async function get_houses(query) {
         const houses = await houses_collection.find(query).toArray();
         return houses;
+    }
+
+    async function create_house(house) {
+        await houses_collection.insertOne(house);
+
+        return true;
     }
 }
