@@ -21,7 +21,4 @@ api_router.post('/users', auth.admin, users.store);
 api_router.put('/users/:id', auth.admin, users.update);
 api_router.delete('/users/:id', auth.admin, users.destroy);
 
-api_router.get('/houses', auth.member, houses.index);
-api_router.post('/houses', auth.member, houses.store);
-
 module.exports = api_router;
