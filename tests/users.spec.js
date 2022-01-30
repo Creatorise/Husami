@@ -6,7 +6,7 @@ const server = request(app)
 beforeAll(async () => {
     await database.connect('testing')
 })
-afterEach(async () => {
+beforeEach(async () => {
     await database.users.deleteMany()
 })
 afterAll(async () => {
@@ -15,7 +15,7 @@ afterAll(async () => {
 
 describe('POST /api/users', () => {
     describe('with valid user', () => {
-        test('respons.status = 202', async () => {
+        test('response.status to be 202', async () => {
             const response = await send_valid_user()
             expect(response.status).toBe(202)
         })
@@ -24,11 +24,30 @@ describe('POST /api/users', () => {
             const user = await database.users.findOne(valid_user())
             expect(user).toBeTruthy()
         })
-        test('responds with success', async () => {
+        test('responds with success true', async () => {
             const response = await send_valid_user()
             expect(response.body.success).toBe(true)
         })
     })
+    describe('user already exists', () => {
+        beforeEach(async () => {
+            database.users.insertOne(valid_user())
+        })
+        test('testing before each insert valid user', async () => {
+            const users = await database.users.find().toArray()
+            expect(users[0]).toBeTruthy()
+            expect(users[1]).toBeFalsy()
+        })
+        test('response.status to be 422 (Unprocessable Entity)', async () => {
+            const response = await send_valid_user()
+            expect(response.status).toBe(422)
+        })
+        test('responds with success false', async () => {
+            const response = await send_valid_user()
+            expect(response.body.success).toBe(false)
+        })
+    })
+    // TODO invalid user
 })
 
 function valid_user() {
