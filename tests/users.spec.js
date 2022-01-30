@@ -16,16 +16,16 @@ afterAll(async () => {
 describe('POST /api/users', () => {
     describe('with valid user', () => {
         test('response.status to be 202', async () => {
-            const response = await send_valid_user()
+            const response = await create_valid_user()
             expect(response.status).toBe(202)
         })
         test('user gets stored in database', async () => {
-            await send_valid_user()
+            await create_valid_user()
             const user = await database.users.findOne(valid_user())
             expect(user).toBeTruthy()
         })
         test('responds with success true', async () => {
-            const response = await send_valid_user()
+            const response = await create_valid_user()
             expect(response.body.success).toBe(true)
         })
     })
@@ -34,13 +34,13 @@ describe('POST /api/users', () => {
             await database.users.insertOne(valid_user())
         })
         test('response.status to be 422 (Unprocessable Entity)', async () => {
-            const response = await send_valid_user()
+            const response = await create_valid_user()
             expect(response.status).toBe(422)
         })
         test('responds with success false', async () => {
             const users = await database.users.find().toArray()
 
-            const response = await send_valid_user()
+            const response = await create_valid_user()
             expect(response.body.success).toBe(false)
         })
     })
@@ -51,7 +51,7 @@ function valid_user() {
     return { name: 'Any Name', email: 'somebody@example.com' }
 }
 
-async function send_valid_user() {
+async function create_valid_user() {
     const response = await server.post('/api/users').send(valid_user())
     return response
 }
@@ -73,8 +73,22 @@ describe('GET /api/users', () => {
         const response = await server.get('/api/users')
         expect(response.body.success).toBe(true)
     })
-    test('data includes users array with lenght amount_of_users', async () => {
+    test('data includes users array with length amount_of_users', async () => {
         const response = await server.get('/api/users')
         expect(response.body.data.users).toHaveLength(amount_of_users)
+    })
+})
+
+describe('GET /api/users/:id', () => {
+    test('non existing user', async () => {
+        const response = await server.get('/api/users/non_existing_user_id')
+        expect(response.status).toBe(404)
+    })
+    test('existing user', async () => {
+        const {
+            body: { id },
+        } = await create_valid_user()
+        const response = await server.get('/api/users/' + id)
+        expect(response.status).toBe(200)
     })
 })
