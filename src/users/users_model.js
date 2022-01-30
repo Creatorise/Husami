@@ -41,4 +41,11 @@ async function delete_one_by_id(id) {
     }
 }
 
-module.exports = { get_all, get_one, get_one_by_id, create, delete_one, delete_one_by_id }
+module.exports = {
+    get_all,
+    get_one,
+    get_one_by_id,
+    create,
+    delete_one,
+    delete_one_by_id,
+}
