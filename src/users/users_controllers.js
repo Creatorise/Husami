@@ -8,8 +8,8 @@ async function create_user(req, res) {
 async function get_user(req, res) {
     const { id } = req.params
     const user = await User.get_one_by_id(id)
-    if (!user) return res.status(404).end()
-    return res.status(200).end()
+    if (!user) return res.status(404).send({ success: false })
+    return res.status(200).send({ success: true })
 }
 async function get_users(req, res) {
     const users = await User.get_all()

@@ -29,8 +29,6 @@ async function create({ name, email }) {
 }
 async function delete_one(query) {
     const response = await database.users.deleteOne(query)
-    console.log(`delete_one ~ response`, response)
-
     if (response.deletedCount === 0) return false
     return true
 }

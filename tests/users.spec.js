@@ -84,6 +84,7 @@ describe('GET /api/users/:id', () => {
     test('non existing user', async () => {
         const response = await server.get('/api/users/non_existing_user_id')
         expect(response.status).toBe(404)
+        expect(response.body.success).toBe(false)
     })
     test('existing user', async () => {
         const {
@@ -91,8 +92,8 @@ describe('GET /api/users/:id', () => {
         } = await create_valid_user()
         const response = await server.get('/api/users/' + id)
         expect(response.status).toBe(200)
+        expect(response.body.success).toBe(true)
     })
-    // TODO: response data
 })
 
 describe('DELETE /api/users/:id', () => {
@@ -109,4 +110,5 @@ describe('DELETE /api/users/:id', () => {
         expect(response.status).toBe(200)
         expect(response.body.success).toBe(true)
     })
+    // TODO: response data
 })
