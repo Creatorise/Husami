@@ -6,4 +6,9 @@ async function create_user(req, res) {
     return res.status(202).send(result)
 }
 
-module.exports = { create_user }
+async function get_users(req, res) {
+    const users = await User.get_all()
+    res.status(200).send({ success: true, data: { users } })
+}
+
+module.exports = { get_users, create_user }

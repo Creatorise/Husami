@@ -39,7 +39,6 @@ describe('POST /api/users', () => {
         })
         test('responds with success false', async () => {
             const users = await database.users.find().toArray()
-            console.log(`test ~ users`, users)
 
             const response = await send_valid_user()
             expect(response.body.success).toBe(false)
@@ -57,13 +56,25 @@ async function send_valid_user() {
     return response
 }
 
-// describe('GET /api/users', () => {
-//     beforeEach(async () => {
-//         for (let i = 0; i < 4; i++) {
-//             await server
-//                 .post('/api/users')
-//                 .send({ name: `Any Name ${i}`, email: `somebody_${i}_@example.com` })
-//         }
-//     })
-//     test('dummy', () => {})
-// })
+describe('GET /api/users', () => {
+    const amount_of_users = 2
+    beforeEach(async () => {
+        for (let i = 0; i < amount_of_users; i++) {
+            await server
+                .post('/api/users')
+                .send({ name: `Any Name ${i}`, email: `somebody_${i}_@example.com` })
+        }
+    })
+    test('response.status to be 200', async () => {
+        const response = await server.get('/api/users')
+        expect(response.status).toBe(200)
+    })
+    test('responds with success true', async () => {
+        const response = await server.get('/api/users')
+        expect(response.body.success).toBe(true)
+    })
+    test('data includes users array with lenght amount_of_users', async () => {
+        const response = await server.get('/api/users')
+        expect(response.body.data.users).toHaveLength(amount_of_users)
+    })
+})
