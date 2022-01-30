@@ -31,23 +31,21 @@ describe('POST /api/users', () => {
     })
     describe('user already exists', () => {
         beforeEach(async () => {
-            database.users.insertOne(valid_user())
-        })
-        test('testing before each insert valid user', async () => {
-            const users = await database.users.find().toArray()
-            expect(users[0]).toBeTruthy()
-            expect(users[1]).toBeFalsy()
+            await database.users.insertOne(valid_user())
         })
         test('response.status to be 422 (Unprocessable Entity)', async () => {
             const response = await send_valid_user()
             expect(response.status).toBe(422)
         })
         test('responds with success false', async () => {
+            const users = await database.users.find().toArray()
+            console.log(`test ~ users`, users)
+
             const response = await send_valid_user()
             expect(response.body.success).toBe(false)
         })
     })
-    // TODO invalid user
+    // TODO test for invalid user (name and email)
 })
 
 function valid_user() {
@@ -58,3 +56,14 @@ async function send_valid_user() {
     const response = await server.post('/api/users').send(valid_user())
     return response
 }
+
+// describe('GET /api/users', () => {
+//     beforeEach(async () => {
+//         for (let i = 0; i < 4; i++) {
+//             await server
+//                 .post('/api/users')
+//                 .send({ name: `Any Name ${i}`, email: `somebody_${i}_@example.com` })
+//         }
+//     })
+//     test('dummy', () => {})
+// })
