@@ -5,8 +5,10 @@ const pino = require('pino')({ level: 'warn' })
 const expressPino = require('express-pino-logger')({
     logger: pino,
 })
+const cookie_parser = require('cookie-parser')
 const express = require('express')
 const app = express()
+app.use(cookie_parser())
 app.use(express.json())
 app.use(express.static('client/public'))
 app.use('/api/users', users_router)

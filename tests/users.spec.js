@@ -28,6 +28,7 @@ describe('POST /api/users', () => {
             const response = await create_valid_user()
             expect(response.body.success).toBe(true)
         })
+        // TODO: validate user
     })
     describe('user already exists', () => {
         beforeEach(async () => {
@@ -35,7 +36,7 @@ describe('POST /api/users', () => {
         })
         test('response.status to be 422 (Unprocessable Entity)', async () => {
             const response = await create_valid_user()
-            expect(response.status).toBe(422)
+            expect(response.status).toBe(422) // ? maybe change to 409
         })
         test('responds with success false', async () => {
             const response = await create_valid_user()

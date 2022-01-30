@@ -18,8 +18,8 @@ async function get_one_by_id(id) {
         return null
     }
 }
-async function create({ name, email }) {
-    const new_user = { name, email }
+async function create({ name, email, role }) {
+    const new_user = { name, email, role }
     const existing_user = await database.users.findOne({ email })
     if (existing_user) {
         return { success: false }

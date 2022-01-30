@@ -1,7 +1,9 @@
 const User = require('./users_model')
 
 async function create_user(req, res) {
-    const result = await User.create(req.body)
+    const { name, email, role } = req.body
+    const user = { name, email, role }
+    const result = await User.create(user)
     if (!result.success) return res.status(422).send(result)
     return res.status(201).send(result)
 }
