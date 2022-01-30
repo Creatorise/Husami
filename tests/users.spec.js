@@ -93,6 +93,7 @@ describe('GET /api/users/:id', () => {
         const response = await server.get('/api/users/' + id)
         expect(response.status).toBe(200)
         expect(response.body.success).toBe(true)
+        expect(response.body.data.user).toBeTruthy()
     })
 })
 
