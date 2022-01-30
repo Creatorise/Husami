@@ -15,10 +15,9 @@ afterAll(async () => {
 
 describe('POST /api/users', () => {
     describe('with valid user', () => {
-        // TODO: fix, should be 201
-        test('response.status to be 202', async () => {
+        test('response.status to be 201', async () => {
             const response = await create_valid_user()
-            expect(response.status).toBe(202)
+            expect(response.status).toBe(201)
         })
         test('user gets stored in database', async () => {
             await create_valid_user()
