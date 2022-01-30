@@ -21,14 +21,12 @@ describe('POST /api/users', () => {
         })
         test('user gets stored in database', async () => {
             await send_valid_user()
-
             const user = await database.users.findOne(valid_user())
-            console.log(`test ~ user`, user)
             expect(user).toBeTruthy()
         })
         test('responds with success', async () => {
             const response = await send_valid_user()
-            expect(response.success).toBe(true)
+            expect(response.body.success).toBe(true)
         })
     })
 })
