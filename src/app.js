@@ -10,10 +10,4 @@ app.use(express.json())
 app.use(express.static('client/public'))
 app.use('/api/users', users_router)
 
-process.on('SIGINT', () => {
-    console.log(`process.on ~ SIGINT`, SIGINT)
-    app.close()
-    database.close()
-})
-
 module.exports = app
