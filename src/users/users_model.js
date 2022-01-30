@@ -27,5 +27,20 @@ async function create({ name, email }) {
     const response = await database.users.insertOne(new_user)
     return { success: true, id: response.insertedId }
 }
+async function delete_one(query) {
+    const response = await database.users.deleteOne(query)
+    console.log(`delete_one ~ response`, response)
 
-module.exports = { get_all, get_one, get_one_by_id, create }
+    if (response.deletedCount === 0) return false
+    return true
+}
+async function delete_one_by_id(id) {
+    try {
+        const was_deleted = await delete_one({ _id: ObjectId(id) })
+        return was_deleted
+    } catch (error) {
+        return false
+    }
+}
+
+module.exports = { get_all, get_one, get_one_by_id, create, delete_one, delete_one_by_id }

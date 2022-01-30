@@ -15,6 +15,7 @@ afterAll(async () => {
 
 describe('POST /api/users', () => {
     describe('with valid user', () => {
+        // TODO: fix, should be 201
         test('response.status to be 202', async () => {
             const response = await create_valid_user()
             expect(response.status).toBe(202)
@@ -90,5 +91,22 @@ describe('GET /api/users/:id', () => {
         } = await create_valid_user()
         const response = await server.get('/api/users/' + id)
         expect(response.status).toBe(200)
+    })
+    // TODO: response data
+})
+
+describe('DELETE /api/users/:id', () => {
+    test('non existing user', async () => {
+        const response = await server.delete('/api/users/non_existing_user_id')
+        expect(response.status).toBe(404)
+        expect(response.body.success).toBe(false)
+    })
+    test('existing user', async () => {
+        const {
+            body: { id },
+        } = await create_valid_user()
+        const response = await server.delete('/api/users/' + id)
+        expect(response.status).toBe(200)
+        expect(response.body.success).toBe(true)
     })
 })
