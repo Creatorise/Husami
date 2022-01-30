@@ -1,13 +1,16 @@
 const users_router = require('./users/users_router')
 const auth_router = require('./auth/auth_router')
 
-const pino = require('pino')({ level: 'warn' })
-const expressPino = require('express-pino-logger')({
-    logger: pino,
-})
+const signale = require('signale')
+signale.disable()
+const morgan = require('morgan')
 const cookie_parser = require('cookie-parser')
 const express = require('express')
 const app = express()
+if (process.env.NODE_ENV === 'development') {
+    app.use(morgan('dev'))
+    signale.enable()
+}
 app.use(cookie_parser())
 app.use(express.json())
 app.use(express.static('client/public'))

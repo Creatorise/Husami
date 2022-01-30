@@ -19,7 +19,7 @@
     "scripts": {
         "dev": "cross-env NODE_ENV=development npm run node:watch-svelte:watch",
         "node:watch-svelte:watch": "concurrently npm:node:watch npm:svelte:watch",
-        "node:watch": "nodemon index.js | pino-pretty",
+        "node:watch": "nodemon index.js",
         "svelte:watch": "cd client && npm run dev",
         "node": "node index.js",
         "svelte": "cd client && npm run start",
@@ -29,13 +29,11 @@
         "cookie-parser": "^1.4.6",
         "dotenv": "^14.1.0",
         "express": "^4.17.2",
-        "express-pino-logger": "^7.0.0",
+        "morgan": "^1.10.0",
+        "signale": "^1.4.0",
         "jsonwebtoken": "^8.5.1",
         "mongodb": "^4.3.0",
-        "morgan": "^1.10.0",
-        "nodemailer": "^6.7.2",
-        "pino": "^7.6.5",
-        "pino-pretty": "^7.5.1"
+        "nodemailer": "^6.7.2"
     },
     "devDependencies": {
         "concurrently": "^7.0.0",
