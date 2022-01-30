@@ -23,7 +23,7 @@
         "svelte:watch": "cd client && npm run dev",
         "node": "node index.js",
         "svelte": "cd client && npm run start",
-        "test": "cross-env NODE_ENV=testing jest --watch-all --detectOpenHandles"
+        "test": "cross-env NODE_ENV=testing jest --watch --verbose --detectOpenHandles"
     },
     "dependencies": {
         "cookie-parser": "^1.4.6",
@@ -42,7 +42,6 @@
         "supertest": "^6.2.2"
     },
     "jest": {
-        "verbose": false,
         "modulePathIgnorePatterns": [
             ",local"
         ]

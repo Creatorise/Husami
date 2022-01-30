@@ -1,5 +1,15 @@
-require('dotenv').config()
-const { MongoClient } = require('mongodb')
+const database = require('../src/services/database')
+
+function initiate_database() {
+    return new Promise(async (resolve, reject) => {
+        await database.connect('testing')
+        resolve()
+    })
+}
+
+beforeEach(() => {
+    return initiate_database()
+})
 
 const app = require('../src/app')
 const request = require('supertest')
@@ -12,17 +22,8 @@ describe('POST /api/users', () => {
     })
     test('user should be saved in database', async () => {
         await send_valid_user()
-
-        const mongo_client = new MongoClient(process.env.MONGO_DB_URI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        })
-        await mongo_client.connect()
-        const database = mongo_client.db('testing')
-        const users_collection = database.collection('users')
-        const user = await users_collection.findOne(valid_user())
+        const user = await database.users.findOne(valid_user())
         expect(user).toBeTruthy()
-        mongo_client.close() // maybe not needed
     })
 })
 
