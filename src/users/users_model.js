@@ -1,8 +1,8 @@
-const database_connection = require('../services/database') // actively connected database
-// console.log(`database_connection`, database_connection)
+const database = require('../services/database')
 
 async function create(user) {
-    // await database.users.insertOne(user)
+    const response = await database.users.insertOne(user)
+    return { success: true, id: response.insertedId }
 }
 
 module.exports = { create }
