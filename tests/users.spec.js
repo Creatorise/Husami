@@ -38,8 +38,6 @@ describe('POST /api/users', () => {
             expect(response.status).toBe(422)
         })
         test('responds with success false', async () => {
-            const users = await database.users.find().toArray()
-
             const response = await create_valid_user()
             expect(response.body.success).toBe(false)
         })
