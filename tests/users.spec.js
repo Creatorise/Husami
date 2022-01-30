@@ -21,7 +21,6 @@ describe('POST /api/users', () => {
         const database = mongo_client.db('testing')
         const users_collection = database.collection('users')
         const user = await users_collection.findOne(valid_user())
-        console.log(`test ~ user`, user)
         expect(user).toBeTruthy()
         mongo_client.close() // maybe not needed
     })
