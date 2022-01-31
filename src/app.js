@@ -1,5 +1,6 @@
 const users_router = require('./users/users_router')
 const auth_router = require('./auth/auth_router')
+const houses_router = require('./houses/houses_router')
 
 global.log = require('signale')
 log.disable()
@@ -15,6 +16,7 @@ app.use(cookie_parser())
 app.use(express.json())
 app.use(express.static('client/public'))
 app.use('/api/users', users_router)
+app.use('/api/houses', houses_router)
 app.use('/api/auth', auth_router)
 
 module.exports = app

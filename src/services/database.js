@@ -10,9 +10,11 @@ module.exports = {
         await mongo_client.connect()
         const database = mongo_client.db(database_name)
         const users = database.collection('users')
+        const houses = database.collection('houses')
 
         this.database = database
         this.users = users
+        this.houses = houses
     },
     async close() {
         return await mongo_client.close()
