@@ -1,4 +1,4 @@
-const nodemailer = require('nodemailer')
+const nodemailer = require('nodemailer');
 
 async function send_email(email_content) {
     let transporter = nodemailer.createTransport({
@@ -9,9 +9,9 @@ async function send_email(email_content) {
             user: process.env.EMAIL,
             pass: process.env.EMAIL_PASSWORD,
         },
-    })
-    const info = await transporter.sendMail(email_content)
+    });
+    const info = await transporter.sendMail(email_content);
     // console.log('Message sent:', info);
 }
 
-module.exports = send_email
+module.exports = send_email;
