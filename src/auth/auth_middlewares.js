@@ -5,7 +5,7 @@ function auth(...access_roles) {
         const { id } = req.params
         const { auth_token } = req.cookies
         const auth_token_payload = verify_auth_token(auth_token)
-        if (!auth_token_payload || typeof auth_token_payload.user.role !== 'string') {
+        if (!auth_token_payload) {
             return res.status(401).send({ success: false, message: 'Invalid auth token' })
         }
         const authorized = access_roles.some(access_role =>

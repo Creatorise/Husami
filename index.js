@@ -11,5 +11,5 @@ process.env.BASE_URL = BASE_URL
 database.connect('development')
 
 app.listen(3000, () => {
-    console.log('server listening on port 3000')
+    log.info(`server listening on port ${PORT} (${BASE_URL})`)
 })
