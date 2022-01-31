@@ -13,6 +13,14 @@ afterAll(async () => {
     await database.close()
 })
 
+jest.mock('../src/auth/auth_middlewares', () => {
+    const actualModule = jest.requireActual('../src/auth/auth_middlewares')
+    return {
+        ...actualModule,
+        auth: () => (req, res, next) => next(),
+    }
+})
+
 describe('POST /api/users', () => {
     describe('with valid user', () => {
         test('response.status to be 201', async () => {

@@ -23,6 +23,8 @@ async function send_auth_link(req, res) {
     })
 }
 
+// TODO: it should be a new access token used for further authentication, not the same one
+// The first one expiring fast and the second with a later expire date
 async function authenticate_link(req, res) {
     const { auth_token } = req.params
     auth_token_payload = verify_auth_token(auth_token)
