@@ -1,11 +1,12 @@
-// const houses = require('./houses_service')
+const houses = require('./houses_service');
 
 async function create_house(req, res) {
-    res.status(400).send({ success: false });
-    // const { name, email, role } = req.body
-    // const house = { name, email, role }
-    // const result = await house.create(house)
-    // if (!result.success) return res.status(422).send(result)
-    // return res.status(201).end()
+    const { name, associates } = req.body;
+    if (!name || !associates) {
+        return res.status(400).send({ success: false });
+    }
+    const house = { name, associates };
+    const result = await houses.create(house);
+    return res.status(201).send({ success: true });
 }
 module.exports = { create_house };

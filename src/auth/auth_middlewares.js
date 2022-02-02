@@ -3,7 +3,6 @@ const { verify_auth_token } = require('./auth_token');
 function auth(...access_roles) {
     return (req, res, next) => {
         const { id } = req.params;
-        console.log(`return ~ id`, id);
         const { auth_token } = req.cookies;
         const auth_token_payload = verify_auth_token(auth_token);
         if (!auth_token_payload) {

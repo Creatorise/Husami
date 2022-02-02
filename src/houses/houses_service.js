@@ -1,13 +1,9 @@
-const { ObjectId } = require('mongodb');
+// const { ObjectId } = require('mongodb');
 const database = require('../services/database');
 
-async function create({ name, email, role }) {
-    const new_user = { name, email, role };
-    const existing_user = await database.users.findOne({ email });
-    if (existing_user) {
-        return { success: false };
-    }
-    const response = await database.users.insertOne(new_user);
+async function create({ name, associates }) {
+    const house = { name, associates };
+    const response = await database.houses.insertOne(house);
     return { success: true, id: response.insertedId };
 }
 module.exports = {
