@@ -56,3 +56,48 @@ describe('Create a new house', () => {
         });
     });
 });
+
+describe('Get all houses', () => {
+    let response;
+    beforeAll(async () => {
+        await database.houses.deleteMany();
+        for (let i = 0; i < 3; i++) {
+            await database.houses.insertOne({
+                name: 'Any name ' + i,
+                associates: [{ id: current_user_id, role: 'admin' }],
+            });
+        }
+        response = await server.get('/api/houses').set('Cookie', admin_auth_cookie);
+    });
+    test('Response status code 200', async () => {
+        expect(response.status).toBe(200);
+    });
+    test('Response body success true', async () => {
+        expect(response.body.success).toBe(true);
+    });
+    test('Returns body data with houses', async () => {
+        expect(response.body.data.houses).toHaveLength(3);
+    });
+});
+
+describe('Get one house', () => {
+    let response;
+    beforeAll(async () => {
+        const { insertedId } = await database.houses.insertOne({
+            name: 'Any name ',
+            associates: [{ id: current_user_id, role: 'admin' }],
+        });
+        response = await server
+            .get('/api/houses/' + insertedId.toString())
+            .set('Cookie', admin_auth_cookie);
+    });
+    test('Response status code 200', () => {
+        expect(response.status).toBe(200);
+    });
+    test('Response body success true', () => {
+        expect(response.body.success).toBe(true);
+    });
+    test('Response body data with house', () => {
+        expect(response.body.data.house).toBeTruthy();
+    });
+});

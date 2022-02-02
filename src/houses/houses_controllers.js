@@ -1,4 +1,4 @@
-const houses = require('./houses_service');
+const houses_service = require('./houses_service');
 
 async function create_house(req, res) {
     const { name, associates } = req.body;
@@ -6,7 +6,16 @@ async function create_house(req, res) {
         return res.status(400).send({ success: false });
     }
     const house = { name, associates };
-    const result = await houses.create(house);
+    const result = await houses_service.create(house);
     return res.status(201).send({ success: true });
 }
-module.exports = { create_house };
+async function get_houses(req, res) {
+    const houses = await houses_service.get_many();
+    return res.status(200).send({ success: true, data: { houses } });
+}
+async function get_house(req, res) {
+    const { id } = req.params;
+    const house = await houses_service.get_one_by_id(id);
+    return res.status(200).send({ success: true, data: { house } });
+}
+module.exports = { create_house, get_houses, get_house };
