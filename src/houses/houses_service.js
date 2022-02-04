@@ -4,7 +4,7 @@ const database = require('../services/database');
 async function create({ name, associates }) {
     const house = { name, associates };
     const response = await database.houses.insertOne(house);
-    return { success: true, id: response.insertedId };
+    return response.insertedId;
 }
 async function get_many(query) {
     const response = await database.houses.find(query);

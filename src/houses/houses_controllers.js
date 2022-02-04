@@ -6,8 +6,9 @@ async function create_house(req, res) {
         return res.status(400).send({ success: false });
     }
     const house = { name, associates };
-    const result = await houses_service.create(house);
-    return res.status(201).send({ success: true });
+    const id = await houses_service.create(house);
+    console.log(`create_house ~ id`, id);
+    return res.status(201).send({ success: true, data: { id } });
 }
 async function get_houses(req, res) {
     const houses = await houses_service.get_many();

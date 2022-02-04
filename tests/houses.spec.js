@@ -54,6 +54,9 @@ describe('Create a new house', () => {
         test('Response body success true', () => {
             expect(response.body.success).toBe(true);
         });
+        test('Response body data', () => {
+            expect(response.body.data.id).toBeTruthy();
+        });
     });
 });
 
