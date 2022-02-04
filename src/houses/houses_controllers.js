@@ -18,4 +18,13 @@ async function get_house(req, res) {
     const house = await houses_service.get_one_by_id(id);
     return res.status(200).send({ success: true, data: { house } });
 }
-module.exports = { create_house, get_houses, get_house };
+async function delete_house(req, res) {
+    const { id } = req.params;
+    const success = await houses_service.delete_one_by_id(id);
+    if (!success) {
+        return res.status(404).send({ success: false });
+    }
+    return res.status(200).send({ success: true });
+}
+
+module.exports = { create_house, get_houses, get_house, delete_house };

@@ -62,10 +62,7 @@ describe('Get all houses', () => {
     beforeAll(async () => {
         await database.houses.deleteMany();
         for (let i = 0; i < 3; i++) {
-            await database.houses.insertOne({
-                name: 'Any name ' + i,
-                associates: [{ id: current_user_id, role: 'admin' }],
-            });
+            await store_user_in_database(i);
         }
         response = await server.get('/api/houses').set('Cookie', admin_auth_cookie);
     });
@@ -83,10 +80,7 @@ describe('Get all houses', () => {
 describe('Get one house', () => {
     let response;
     beforeAll(async () => {
-        const { insertedId } = await database.houses.insertOne({
-            name: 'Any name ',
-            associates: [{ id: current_user_id, role: 'admin' }],
-        });
+        const { insertedId } = await store_user_in_database();
         response = await server
             .get('/api/houses/' + insertedId.toString())
             .set('Cookie', admin_auth_cookie);
@@ -101,3 +95,52 @@ describe('Get one house', () => {
         expect(response.body.data.house).toBeTruthy();
     });
 });
+
+describe('Delete one house', () => {
+    describe('by nonexistent house id', () => {
+        let response;
+        beforeAll(async () => {
+            const nonexistent_house_id = 'abc';
+            response = await server
+                .delete('/api/houses/' + nonexistent_house_id)
+                .set('Cookie', admin_auth_cookie);
+        });
+        test('Response status code 404', () => {
+            expect(response.status).toBe(404);
+        });
+        test('Response body success false', () => {
+            expect(response.body.success).toBe(false);
+        });
+        test('Response body data to be empty', () => {
+            expect(response.body.data).toBe(undefined);
+        });
+    });
+
+    describe('by valid house id', () => {
+        let house_id;
+        beforeAll(async () => {
+            const { insertedId } = await store_user_in_database();
+            house_id = insertedId.toString();
+        });
+        let response;
+        beforeAll(async () => {
+            response = await server
+                .delete('/api/houses/' + house_id)
+                .set('Cookie', admin_auth_cookie);
+        });
+        test('Response status code 200 ', () => {
+            expect(response.status).toBe(200);
+        });
+        test('Response body success true', () => {
+            expect(response.body.success).toBe(true);
+        });
+    });
+});
+
+async function store_user_in_database(number = '') {
+    const valid_house = {
+        name: ('Any name ' + number).trim(),
+        associates: [{ id: current_user_id, role: 'admin' }],
+    };
+    return await database.houses.insertOne(valid_house);
+}
