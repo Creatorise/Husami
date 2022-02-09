@@ -15,7 +15,7 @@ const admin_auth_cookie =
 const current_user_id = '61f70135e47ca07d33111f37';
 
 describe('Create a new house', () => {
-    describe('Invalid house', () => {
+    describe('Invalid input', () => {
         let response;
         beforeAll(async () => {
             await database.houses.deleteMany();
@@ -35,7 +35,7 @@ describe('Create a new house', () => {
         name: 'Any name',
         associates: [{ id: current_user_id, role: 'admin' }],
     };
-    describe('Valid house', () => {
+    describe('Valid input', () => {
         let response;
         beforeAll(async () => {
             await database.houses.deleteMany();
@@ -48,13 +48,13 @@ describe('Create a new house', () => {
             const houses = await database.houses.find().toArray();
             expect(houses).toHaveLength(1);
         });
-        test('Response status code 201', () => {
+        test('Response status code is 201', () => {
             expect(response.status).toBe(201);
         });
-        test('Response body success true', () => {
+        test('Response body success is true', () => {
             expect(response.body.success).toBe(true);
         });
-        test('Response body data', () => {
+        test('Response body id is truthy', () => {
             expect(response.body.data.id).toBeTruthy();
         });
     });
@@ -69,13 +69,13 @@ describe('Get all houses', () => {
         }
         response = await server.get('/api/houses').set('Cookie', admin_auth_cookie);
     });
-    test('Response status code 200', async () => {
+    test('Response status code is 200', async () => {
         expect(response.status).toBe(200);
     });
-    test('Response body success true', async () => {
+    test('Response body success is true', async () => {
         expect(response.body.success).toBe(true);
     });
-    test('Returns body data with houses', async () => {
+    test('Response body inludes all houses', async () => {
         expect(response.body.data.houses).toHaveLength(3);
     });
 });
@@ -88,19 +88,19 @@ describe('Get one house', () => {
             .get('/api/houses/' + insertedId.toString())
             .set('Cookie', admin_auth_cookie);
     });
-    test('Response status code 200', () => {
+    test('Response status code is 200', () => {
         expect(response.status).toBe(200);
     });
-    test('Response body success true', () => {
+    test('Response body success is true', () => {
         expect(response.body.success).toBe(true);
     });
-    test('Response body data with house', () => {
+    test('Response body includes one house', () => {
         expect(response.body.data.house).toBeTruthy();
     });
 });
 
 describe('Delete one house', () => {
-    describe('by nonexistent house id', () => {
+    describe('with id of nonexistent house', () => {
         let response;
         beforeAll(async () => {
             const nonexistent_house_id = 'abc';
@@ -108,18 +108,17 @@ describe('Delete one house', () => {
                 .delete('/api/houses/' + nonexistent_house_id)
                 .set('Cookie', admin_auth_cookie);
         });
-        test('Response status code 404', () => {
+        test('Response status code is 404', () => {
             expect(response.status).toBe(404);
         });
-        test('Response body success false', () => {
+        test('Response body success is false', () => {
             expect(response.body.success).toBe(false);
         });
-        test('Response body data to be empty', () => {
+        test('Response body data is empty', () => {
             expect(response.body.data).toBe(undefined);
         });
     });
-
-    describe('by valid house id', () => {
+    describe('with valid id', () => {
         let house_id;
         beforeAll(async () => {
             const { insertedId } = await store_user_in_database();
@@ -131,10 +130,10 @@ describe('Delete one house', () => {
                 .delete('/api/houses/' + house_id)
                 .set('Cookie', admin_auth_cookie);
         });
-        test('Response status code 200 ', () => {
+        test('Response status code is 200 ', () => {
             expect(response.status).toBe(200);
         });
-        test('Response body success true', () => {
+        test('Response body success is true', () => {
             expect(response.body.success).toBe(true);
         });
     });
