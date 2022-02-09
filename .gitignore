@@ -2,6 +2,7 @@
 ,local
 .history
 .lh
+.vscode
 
 # dotenv environment variables file
 .env
