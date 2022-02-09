@@ -7,7 +7,6 @@ async function create_house(req, res) {
     }
     const house = { name, associates };
     const id = await houses_service.create(house);
-    console.log(`create_house ~ id`, id);
     return res.status(201).send({ success: true, data: { id } });
 }
 async function get_houses(req, res) {
@@ -17,6 +16,7 @@ async function get_houses(req, res) {
 async function get_house(req, res) {
     const { id } = req.params;
     const house = await houses_service.get_one_by_id(id);
+    if (!house) return res.status(400).send({ success: false });
     return res.status(200).send({ success: true, data: { house } });
 }
 async function delete_house(req, res) {

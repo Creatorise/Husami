@@ -16,6 +16,7 @@ async function get_one(query) {
     return house;
 }
 async function get_one_by_id(id) {
+    if (!ObjectId.isValid(id)) return null;
     const house = await get_one({ _id: ObjectId(id) });
     return house;
 }

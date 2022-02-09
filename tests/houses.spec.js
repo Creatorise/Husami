@@ -81,21 +81,38 @@ describe('Get all houses', () => {
 });
 
 describe('Get one house', () => {
-    let response;
-    beforeAll(async () => {
-        const { insertedId } = await store_user_in_database();
-        response = await server
-            .get('/api/houses/' + insertedId.toString())
-            .set('Cookie', admin_auth_cookie);
+    describe('with invalid id', () => {
+        let response;
+        beforeAll(async () => {
+            const nonexistent_house_id = 'abc';
+            response = await server
+                .get('/api/houses/' + nonexistent_house_id)
+                .set('Cookie', admin_auth_cookie);
+        });
+        test('Response status code is 400', () => {
+            expect(response.status).toBe(400);
+        });
+        test('Response body success is false', () => {
+            expect(response.body.success).toBe(false);
+        });
     });
-    test('Response status code is 200', () => {
-        expect(response.status).toBe(200);
-    });
-    test('Response body success is true', () => {
-        expect(response.body.success).toBe(true);
-    });
-    test('Response body includes one house', () => {
-        expect(response.body.data.house).toBeTruthy();
+    describe('with valid id', () => {
+        let response;
+        beforeAll(async () => {
+            const { insertedId } = await store_user_in_database();
+            response = await server
+                .get('/api/houses/' + insertedId.toString())
+                .set('Cookie', admin_auth_cookie);
+        });
+        test('Response status code is 200', () => {
+            expect(response.status).toBe(200);
+        });
+        test('Response body success is true', () => {
+            expect(response.body.success).toBe(true);
+        });
+        test('Response body includes one house', () => {
+            expect(response.body.data.house).toBeTruthy();
+        });
     });
 });
 
