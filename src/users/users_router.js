@@ -1,12 +1,12 @@
 const { auth, access } = require('../auth/auth_middlewares');
-const { get_users, get_user, create_user, delete_user } = require('./users_controllers');
+const users = require('./users_controllers');
 
 const express = require('express');
 const router = express.Router();
 
-router.get('/', auth(access.admin), get_users);
-router.get('/:id', auth(access.admin, access.current_user), get_user);
-router.post('/', auth(access.admin), create_user);
-router.delete('/:id', auth(access.admin), delete_user);
+router.get('/', auth(access.admin), users.get_all);
+router.get('/:id', auth(access.admin, access.current_user), users.get_one);
+router.post('/', auth(access.admin), users.create_one);
+router.delete('/:id', auth(access.admin), users.delete_one);
 
 module.exports = router;

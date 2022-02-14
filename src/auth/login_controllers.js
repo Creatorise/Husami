@@ -1,4 +1,4 @@
-const users_service = require('../users/users_model');
+const users_service = require('../users/users_service');
 const { create_auth_token, verify_auth_token } = require('./auth_token');
 const send_auth_email = require('./send_auth_email');
 const EventEmitter = require('events');
@@ -17,7 +17,7 @@ async function send_auth_link(req, res) {
     const auth_token_to_send = create_auth_token(user);
     send_auth_email(email, auth_token_to_send);
 
-    auth_emitter.once(user._id.toString(), auth_token => {
+    auth_emitter.once(user._id.toString(), (auth_token) => {
         res.cookie('auth_token', auth_token);
         res.send('The auth token has been stored as browser cookie');
     });
