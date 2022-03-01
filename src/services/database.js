@@ -6,17 +6,19 @@ const mongo_client = new MongoClient(process.env.MONGO_DB_URI, {
 });
 
 module.exports = {
-    async connect(database_name) {
+    connect: async function (database_name) {
         await mongo_client.connect();
         const database = mongo_client.db(database_name);
         const users = database.collection('users');
         const houses = database.collection('houses');
+        const tasks = database.collection('tasks');
 
         this.database = database;
         this.users = users;
         this.houses = houses;
+        this.tasks = tasks;
     },
-    async close() {
+    close: async () => {
         return await mongo_client.close();
     },
 };
