@@ -5,17 +5,23 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="styles.css" />
+        <script src="script.js" defer></script>
         <title>Husami</title>
     </head>
     <body>
         <main class="page">
             <div class="login">
                 <form class="login__form">
-                    <input class="login__item" type="text" placeholder="Email" />
+                    <input
+                        class="login__item"
+                        type="email"
+                        placeholder="Email"
+                        name="email"
+                    />
                     <input class="login__item" type="submit" value="Login with email" />
-                    <span class="login__item"
-                        >An email will be sent to you with a login link</span
-                    >
+                    <p class="login__item"></p>
+                        An email will be sent to you with a login link
+                    </p>
                 </form>
             </div>
         </main>
