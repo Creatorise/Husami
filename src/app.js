@@ -14,7 +14,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 app.use(cookie_parser());
 app.use(express.json());
-app.use(express.static('client/public'));
+app.use('/', express.static('client'));
 app.use('/api/auth', auth_router);
 app.use('/api/houses', houses_router);
 app.use('/api/users', users_router);
