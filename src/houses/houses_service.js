@@ -1,8 +1,8 @@
 const database = require('../services/database');
 const { ObjectId } = require('mongodb');
 
-const create = async ({ name, associates }) => {
-    const house = { name, associates };
+const create = async ({ name, associates, tasks }) => {
+    const house = { name, associates, tasks };
     const response = await database.houses.insertOne(house);
     return response.insertedId;
 };

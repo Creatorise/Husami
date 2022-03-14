@@ -11,11 +11,11 @@ const get_one = async (req, res) => {
     return res.status(200).send({ success: true, data: { house } });
 };
 const create_one = async (req, res) => {
-    const { name, associates } = req.body;
+    const { name, associates, tasks } = req.body;
     if (!name || !associates) {
         return res.status(400).send({ success: false });
     }
-    const house = { name, associates };
+    const house = { name, associates, tasks };
     const id = await houses_service.create(house);
     return res.status(201).send({ success: true, data: { id } });
 };

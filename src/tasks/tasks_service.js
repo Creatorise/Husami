@@ -10,7 +10,7 @@ const houses_service = require('../houses/houses_service');
 const create = async (task, house_id) => {
     const house = await houses_service.get_one_by_id(house_id);
     console.log(`create ~ house`, house);
-    house.insertOne(task);
+    return database.houses.insertOne(task);
 };
 module.exports = {
     create,
