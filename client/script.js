@@ -1,7 +1,11 @@
 const login__form = document.querySelector('.login__form');
 
 //! Debug
-// displayLogin(false);
+displayLogin(false);
+add_user_table_row({
+    email: 'test email',
+    role: 'admin',
+});
 
 login__form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -37,4 +41,20 @@ function displayLogin(bool) {
     }
     document.querySelector('.login').style.display = 'none';
     document.querySelector('.logged-in').style.display = 'block';
+}
+
+function add_user_table_row(user) {
+    const user_table = document.querySelector('.user_table');
+
+    const user_row = document.createElement('tr');
+    const user_email_cell = document.createElement('td');
+    const user_role_cell = document.createElement('td');
+
+    user_row.appendChild(user_email_cell);
+    user_row.appendChild(user_role_cell);
+
+    user_email_cell.innerText = user.email;
+    user_role_cell.innerText = user.role;
+
+    user_table.appendChild(user_row);
 }
