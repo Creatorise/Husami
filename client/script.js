@@ -1,5 +1,7 @@
 const login__form = document.querySelector('.login__form');
-console.log(`login__form`, login__form);
+
+//! Debug
+// displayLogin(false);
 
 login__form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -13,11 +15,26 @@ login__form.addEventListener('submit', async (e) => {
             Accept: 'application/json',
             'Content-Type': 'application/json',
         },
+        credentials: 'include',
         body: JSON.stringify({ email }),
     });
-    console.log(`login__form.addEventListener ~ response`, response);
     if (!response.ok) {
-        console.log(`login__form.addEventListener ~ response.status`, response.status);
         return;
     }
+
+    displayLogin(false);
 });
+
+function displayLogin(bool) {
+    console.log(
+        `displayLogin ~ document.querySelector('.login')`,
+        document.querySelector('.login')
+    );
+    if (bool) {
+        document.querySelector('.login').style.display = 'block';
+        document.querySelector('.logged-in').style.display = 'none';
+        return;
+    }
+    document.querySelector('.login').style.display = 'none';
+    document.querySelector('.logged-in').style.display = 'block';
+}

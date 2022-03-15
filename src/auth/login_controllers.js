@@ -18,7 +18,10 @@ async function send_auth_link(req, res) {
     send_auth_email(email, auth_token_to_send);
 
     auth_emitter.once(user._id.toString(), (auth_token) => {
-        res.cookie('auth_token', auth_token);
+        res.cookie('auth_token', auth_token, {
+            httpOnly: true,
+            secure: true,
+        });
         res.send('The auth token has been stored as browser cookie');
     });
 }
@@ -32,7 +35,10 @@ async function authenticate_link(req, res) {
         return res.send('invalid auth token');
     }
     auth_emitter.emit(auth_token_payload.user.id.toString(), auth_token);
-    res.cookie('auth_token', auth_token);
+    res.cookie('auth_token', auth_token, {
+        httpOnly: true,
+        secure: true,
+    });
     res.send('The auth token has been stored as browser cookie');
 }
 
