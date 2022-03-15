@@ -11,6 +11,4 @@ router.post('/', auth(access.admin), houses.create_one);
 // router.put('/:id', auth(access.admin), houses.update_one);
 router.delete('/:id', auth(access.admin), houses.delete_one);
 
-router.use('/:id/tasks', tasks_router);
-
 module.exports = router;
