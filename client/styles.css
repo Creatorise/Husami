@@ -11,6 +11,8 @@ body {
     background: #121212;
     color: #ccc;
     height: 100%;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans',
+        Arial, sans-serif;
 }
 
 .page {
@@ -36,4 +38,19 @@ body {
 
 .logged-in {
     display: none;
+}
+
+table {
+    width: 100%;
+    border: 1px solid #000;
+}
+
+th,
+td {
+    width: 25%;
+    text-align: left;
+}
+
+.page * + * {
+    margin-top: 1rem;
 }

@@ -2,10 +2,7 @@ const login__form = document.querySelector('.login__form');
 
 //! Debug
 displayLogin(false);
-add_user_table_row({
-    email: 'test email',
-    role: 'admin',
-});
+add_users_to_table();
 
 login__form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -43,6 +40,19 @@ function displayLogin(bool) {
     document.querySelector('.logged-in').style.display = 'block';
 }
 
+async function add_users_to_table() {
+    const response_json = await fetch('/api/users', {
+        method: 'GET',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+    });
+
+    const response = await response_json.json();
+    response.data.users.forEach((user) => add_user_table_row(user));
+}
 function add_user_table_row(user) {
     const user_table = document.querySelector('.user_table');
 
