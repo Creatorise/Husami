@@ -21,13 +21,9 @@ body {
     width: 100%;
     height: 100%;
 }
-.page__hero {
-    position: relative;
-    height: 40%;
-}
 .hero__background {
     background: #44087c;
-    height: 70%;
+    height: 30%;
 }
 .hero__transition {
     background: linear-gradient(#44087c, transparent);
@@ -35,7 +31,7 @@ body {
 }
 .hero__heading {
     position: absolute;
-    top: 67%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -100%);
     font-size: 2.5rem;
