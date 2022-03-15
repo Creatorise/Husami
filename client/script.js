@@ -3,6 +3,7 @@ const login__form = document.querySelector('.login__form');
 //! Debug
 displayLogin(false);
 add_users_to_table();
+add_houses_to_table();
 
 login__form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -54,17 +55,49 @@ async function add_users_to_table() {
     response.data.users.forEach((user) => add_user_table_row(user));
 }
 function add_user_table_row(user) {
-    const user_table = document.querySelector('.user_table');
+    const users_table = document.querySelector('.users_table');
 
     const user_row = document.createElement('tr');
     const user_email_cell = document.createElement('td');
     const user_role_cell = document.createElement('td');
+    const user_raw_cell = document.createElement('td');
 
     user_row.appendChild(user_email_cell);
     user_row.appendChild(user_role_cell);
+    user_row.appendChild(user_raw_cell);
 
     user_email_cell.innerText = user.email;
     user_role_cell.innerText = user.role;
+    user_raw_cell.innerText = JSON.stringify(user, null, 2);
 
-    user_table.appendChild(user_row);
+    users_table.appendChild(user_row);
+}
+
+async function add_houses_to_table() {
+    const response_json = await fetch('/api/houses', {
+        method: 'GET',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+    });
+
+    const response = await response_json.json();
+    response.data.houses.forEach((house) => add_house_table_row(house));
+}
+function add_house_table_row(house) {
+    const houses_table = document.querySelector('.houses_table');
+
+    const house_row = document.createElement('tr');
+    const house_name_cell = document.createElement('td');
+    const house_raw_cell = document.createElement('td');
+
+    house_row.appendChild(house_name_cell);
+    house_row.appendChild(house_raw_cell);
+
+    house_name_cell.innerText = house.name;
+    house_raw_cell.innerText = JSON.stringify(house, null, 2);
+
+    houses_table.appendChild(house_row);
 }
