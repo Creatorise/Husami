@@ -49,7 +49,7 @@ body {
     flex-direction: column;
 }
 .login__form * + * {
-    margin-top: 1rem;
+    margin-top: 0.6rem;
 }
 .login__item {
     width: 100%;
@@ -59,7 +59,8 @@ body {
     border: 1px solid rgba(51, 51, 51, 0.377);
     padding: 0 0.6rem;
 }
-
+.login__waiting,
+.login__rejected,
 .logged-in {
     display: none;
 }
