@@ -39,17 +39,25 @@ body {
 
 .login {
     position: absolute;
-    top: 50%;
+    top: 57%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 15%;
+    width: 60%;
 }
 .login__form {
     display: flex;
     flex-direction: column;
 }
+.login__form * + * {
+    margin-top: 1rem;
+}
 .login__item {
     width: 100%;
+    height: 2rem;
+    background: #cac5ce;
+    border-radius: 0.2rem;
+    border: 1px solid rgba(51, 51, 51, 0.377);
+    padding: 0 0.6rem;
 }
 
 .logged-in {
