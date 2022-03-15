@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script type="text/javascript" src="https://livejs.com/live.js"></script>
         <link rel="stylesheet" href="styles.css" />
-        <script src="script.js" defer></script>
+        <script src="script.js" type="module"></script>
         <title>Husami - Login</title>
     </head>
     <body>
@@ -14,25 +14,41 @@
             <h1 class="hero__heading">Husami</h1>
             <div class="hero__background"></div>
             <div class="hero__transition"></div>
-            <div class="login">
-                <form class="login__form">
-                    <input
-                        class="login__item"
-                        type="email"
-                        placeholder="Email"
-                        name="email"
-                    />
-                    <input class="login__item" type="submit" value="Login with email" />
-                    <!-- <p class="login__item">
-                        An email will be sent to you with a login link
-                    </p> -->
-                </form>
-                <div class="login__waiting">
-                    Click the link sent to your email
+
+            <div class="login_state_switch">
+                <div class="login login_state--input">
+                    <form class="login__form">
+                        <input
+                            class="login__item"
+                            type="email"
+                            placeholder="Email"
+                            name="email"
+                        />
+                        <input
+                            class="login__item"
+                            type="submit"
+                            value="Login with email"
+                        />
+                    </form>
+                </div>
+
+                <div class="login_state--waiting">
+                    <p class="login__message">
+                        Click the link sent to your email. <a href=".">Login again</a>
+                    </p>
                     <!-- TODO: Replace "your email" by actual email address -->
                 </div>
-                <div class="login__rejected">
-                    Login was unsuccessful. <a href=".">Login again</a>
+
+                <div class="login_state--rejected">
+                    <p class="login__message">
+                        Login was unsuccessful. <a href=".">Login again</a>
+                    </p>
+                </div>
+
+                <div class="login_state--logged_in">
+                    <p class="login__message">
+                        Successfully logged in! <a href=".">Login again</a>
+                    </p>
                 </div>
             </div>
             <!-- <div class="logged-in">logged in</div> -->
