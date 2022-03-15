@@ -16,9 +16,29 @@ body {
 }
 
 .page {
-    position: relative;
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: 100%;
+}
+.page__hero {
+    position: relative;
+    height: 40%;
+}
+.hero__background {
+    background: #44087c;
+    height: 70%;
+}
+.hero__transition {
+    background: linear-gradient(#44087c, transparent);
+    height: 30%;
+}
+.hero__heading {
+    position: absolute;
+    top: 67%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    font-size: 2.5rem;
 }
 
 .login {
@@ -38,20 +58,4 @@ body {
 
 .logged-in {
     display: none;
-}
-
-table {
-    width: 100%;
-    border: 1px solid #000;
-}
-
-th,
-td {
-    width: 25%;
-    text-align: left;
-    vertical-align: top;
-}
-
-.page * + * {
-    margin-top: 1rem;
 }

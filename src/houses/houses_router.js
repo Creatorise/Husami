@@ -1,6 +1,5 @@
 const { auth, access } = require('../auth/auth_middlewares');
 const houses = require('./houses_controllers');
-const tasks_router = require('../tasks/tasks_router');
 
 const express = require('express');
 const router = express.Router();

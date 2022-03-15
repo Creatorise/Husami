@@ -9,7 +9,7 @@ const cookie_parser = require('cookie-parser');
 const express = require('express');
 const app = express();
 if (process.env.NODE_ENV === 'development') {
-    app.use(morgan('dev'));
+    // app.use(morgan('dev'));
     log.enable();
 }
 app.use(cookie_parser());
