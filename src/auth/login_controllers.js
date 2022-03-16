@@ -39,7 +39,8 @@ async function authenticate_link(req, res) {
         httpOnly: true,
         secure: true,
     });
-    res.send('The auth token has been stored as browser cookie');
+    // res.send('The auth token has been stored as browser cookie');
+    res.redirect('/');
 }
 
 function remove_auth_cookie(req, res) {
